@@ -1,16 +1,28 @@
+//Current question index
+qIndex = 0; 
+
 var mainContent = document.querySelector(".main-content");
 
 const playContent = 
 '<div>Would you like to play a game</div> <button type="submit" id="play">Play</button>'
 
 const questionFormat = 
-'<ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol>'
+'<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol>'
 
+// Question Objects
 const question1 = {
     question : "What is a number?",
     answers : ["0","word", "true", "undefined"],
     correctAnswer : "0"
 }
+
+const question2 = {
+    question : "What is a string?",
+    answers : ["0","word", "true", "undefined"],
+    correctAnswer : "word"
+}
+
+const qArray = [question1, question2];
 
 function swapContent(newinnerHTML){
     mainContent.innerHTML = newinnerHTML;
@@ -22,21 +34,14 @@ var playButton = document.querySelector("#play");
 playButton.addEventListener("click", playGame);
 
 
+//Function that starts the game
 function playGame(){
     swapContent(questionFormat)
     var answers = document.querySelectorAll('.answer');
-    
-    for(const answer of answers){
-        console.log(answer)
-        answer.addEventListener("click", function(){
-            if(answer.dataset.correct === "true"){
-                console.log(answer.dataset.correct);
-                mainContent.innerHTML = "CORRECT";
-            }
-            else{
-                console.log(answer.dataset.correct);
-                mainContent.innerHTML = "INCORRECT"
-            }
-        })
+    var question = document.querySelector('.question')
+
+    while(qIndex < qArray.length){
+        let currentQuestion = qArray[qIndex];
+        
     }
 }
