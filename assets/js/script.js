@@ -5,6 +5,9 @@ var timerElement = document.querySelector(".timer")
 var currentQuestion = {}
 var timer = 60;
 let timeInterval; 
+let highScores = [];
+
+
 
 
 //Formats for changing layout 
@@ -14,7 +17,9 @@ const playContent =
 const questionFormat = 
 '<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol>'
 
-const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initials"></label><input name="initials" placeholder="Initials Here"></input><button>Submit</button>'
+const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initials"></label><input class="initials" name="initials" placeholder="Initials Here"></input><button class="submit-score">Submit</button>'
+
+
 
 
 // Question Objects --------------------------------------------------------------
@@ -78,12 +83,39 @@ function playGame(){
     presentQuestion();
 }
 
+function addPlayButtonEventListener(){
+    var playButton = document.querySelector("#play");
+    playButton.addEventListener("click", playGame);
+}
 
+//Adds event listener to and the save score function to the submit button in the highscore context
+function addInitialEventListener(){
+    var submitScoreBtn = document.querySelector(".submit-score");
+    var initialsElement = document.querySelector(".initials")
+    submitScoreBtn.addEventListener("click", saveScore = function(){
+        if(initialsElement.value !== ""){
+            highScores.push({
+                initials : initialsElement.value,
+                score : timer
+            })  
+            localStorage.setItem("userScores" ,JSON.stringify(highScores));
+            submitScoreBtn.removeEventListener("click", saveScore);
+            swapContent(playContent);
+            addPlayButtonEventListener();
+        }
+    })
+}
+
+
+
+//Presents the next question until no more questions are left
 function presentQuestion(){
     
     if(qIndex === qArray.length){
+        qIndex = 0;
         swapContent(initialFormat);
         clearInterval(timeInterval);
+        addInitialEventListener()
         return;
     }
     //Question we are currently displaying
@@ -113,14 +145,29 @@ function presentQuestion(){
     })
 }
 
+function initScores(){
+    if(localStorage.getItem("userScores") === null){
+        highScores = [];
+    }
+    else{
+        highScores = JSON.parse(localStorage.getItem("userScores"));
+    }
+}
 
+function viewScores(){
+    swapContent(highscoreContent);
+}
 
 
 //Swap to the do you want to play initially
 swapContent(playContent);
 
 //Play button to add event listener to and add it 
-var playButton = document.querySelector("#play");
-playButton.addEventListener("click", playGame);
+
+var viewScore = document.querySelector(".view-scores")
+viewScore.addEventListener("click", viewScores)
+
+addPlayButtonEventListener();
+initScores();
 
 
