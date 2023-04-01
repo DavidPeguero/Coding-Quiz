@@ -22,30 +22,42 @@ const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initial
 const viewScoreFormat = '<p class="score-list">Highscores</p><ol class="highscores"></ol>'
 // Question Objects --------------------------------------------------------------
 const question1 = {
-    question : "What is a number?",
-    answers : ["0","word", "true", "undefined"],
-    correctAnswer : "0"
+    question : "What is method used to add an event listener?",
+    answers : ["addEventLister","removeEventListener", "appendChild", "addEventListener"],
+    correctAnswer : "addEventListener"
 }
 
 const question2 = {
-    question : "What is a string?",
-    answers : ["0","word", "true", "undefined"],
-    correctAnswer : "word"
+    question : "What does clearInterval(intervalID) do?",
+    answers : ["Cancels the repeated action corresponding to intervalID",
+                "Stop the timer corresponding to intervalID"
+                ,"Restarts the timer corresponding to intervalID"
+                ,"None of the Above"],
+    correctAnswer : "Cancels the repeated action corresponding to intervalID"
 }
 
 const question3 = {
     question : "What is a boolean?",
-    answers : ["0","word", "true", "undefined"],
-    correctAnswer : "true"
+    answers : ["A variable that stores true or false",
+    "A value that is either true or false",
+     "A Mario enemy who is leaning when you're not looking at it",
+      "A value that is undefined"],
+    correctAnswer : "A value that is either true or false"
 }
 
 const question4 = {
-    question : "What is undefined?",
-    answers : ["0","undefined", "true", "undefined"],
-    correctAnswer : "undefined"
+    question : "What does DOM stand for",
+    answers : ["Document Object Model","Domain Of Man", "Document Object Methods", "None of the Above"],
+    correctAnswer : "Document Object Model"
 }
 
-const qArray = [question1, question2, question3, question4];
+const question5 = {
+    question : "Which of the following is true concerning localStorage",
+    answers : ["Can store objects","Can only store strings", "When using setItem on an item that doesn't exist it returns 0", "None of the Above"],
+    correctAnswer : "Can only store strings"
+}
+
+const qArray = [question1, question2, question3, question4, question5];
 
 // --------------------------------------------------------------------------
 
@@ -53,6 +65,7 @@ const qArray = [question1, question2, question3, question4];
 function startTimer(){
 
     timer = 60;
+    timerElement.innerHTML = "Time: " + timer;
     timeInterval = setInterval(function(){
         timer--;
         timerElement.innerHTML = "Time: " + timer;
@@ -138,6 +151,19 @@ function presentQuestion(){
                 answerList.removeEventListener("click", giveAnswer);
                 qIndex++;
                 presentQuestion();
+            }
+            else{
+                timer -= 10;
+                if(timer <= 0){
+                    clearInterval(timeInterval);
+                    timerElement.innerHTML = "Time: " + 0;
+                    answerList.removeEventListener("click", giveAnswer);
+                    swapContent(playContent);
+                    addPlayButtonEventListener();
+                }
+                else{
+                    timerElement.innerHTML = "Time: " + timer;
+                }
             }
         }
     })
