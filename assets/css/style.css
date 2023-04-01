@@ -11,6 +11,11 @@ body {
     line-height: 1.5;
 }
 
+.top-bar{
+    margin-inline: 1rem;
+    margin-bottom: 2rem;
+}
+
 .timer{
     float: right;
 }
@@ -21,6 +26,11 @@ body {
     align-items: center;
 }
 
+.question, .ask-initials, .play-game{
+    font-size: 28px;
+    font-weight: 800;
+}
+
 .answers{
     display: flex;
     flex-direction: column;
@@ -28,15 +38,31 @@ body {
     list-style: none;
     text-align: left;
 }
-.answer::before{
-    content: "1. "
-}
+
 .answer{
-    min-width: 500px;
+    min-width: 300px;
     border: black 2px solid;
     border-radius: 8px;
     background-color: blueviolet;
     margin: 5px;
     text-align: left;
 
+}
+
+.answer::before{
+    margin-left: 5px;
+}
+
+.answer:nth-child(1)::before{
+    content: "1. ";
+}
+
+.answer:nth-child(2)::before{
+    content: "2. ";
+}
+.answer:nth-child(3)::before{
+    content: "3. ";
+}
+.answer:nth-child(4)::before{
+    content: "4. ";
 }

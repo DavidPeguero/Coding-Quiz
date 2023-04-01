@@ -9,12 +9,12 @@ let timeInterval;
 
 //Formats for changing layout 
 const playContent = 
-'<div>Would you like to play a game</div> <button type="submit" id="play">Play</button>'
+'<p class="play-game">Would you like to play a game</p> <button type="submit" id="play">Play</button>'
 
 const questionFormat = 
 '<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol>'
 
-const initialFormat = '<label for="initials"></label><input name="initials" placeholder="Initials Here"></input><button>Submit</button>'
+const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initials"></label><input name="initials" placeholder="Initials Here"></input><button>Submit</button>'
 
 
 // Question Objects --------------------------------------------------------------
