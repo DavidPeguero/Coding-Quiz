@@ -1,10 +1,11 @@
 //Variable Required
 var qIndex = 0; 
 var mainContent = document.querySelector(".main-content");
+var timerElement = document.querySelector(".timer")
 var currentQuestion = {}
+var timer = 60;
+let timeInterval; 
 
-//Play button to add event listener to
-var playButton = document.querySelector("#play");
 
 //Formats for changing layout 
 const playContent = 
@@ -45,6 +46,23 @@ const qArray = [question1, question2, question3, question4];
 
 // --------------------------------------------------------------------------
 
+//Function that starts the timer and returns the interval to clear it elsewhere
+function startTimer(){
+
+    timer = 60;
+    timeInterval = setInterval(function(){
+        timer--;
+        timerElement.innerHTML = "Time: " + timer;
+
+        //When timer is done do this
+        if(timer === 0){
+            clearInterval(timeInterval);
+        }
+    },1000)
+
+    return timeInterval;
+}
+
 //Function that swaps the maincontent section with another html preset
 function swapContent(newinnerHTML){
     mainContent.innerHTML = newinnerHTML;
@@ -55,6 +73,7 @@ function swapContent(newinnerHTML){
 
 //Function that starts the game
 function playGame(){
+    startTimer();
     swapContent(questionFormat);
     presentQuestion();
 }
@@ -64,6 +83,7 @@ function presentQuestion(){
     
     if(qIndex === qArray.length){
         swapContent(initialFormat);
+        clearInterval(timeInterval);
         return;
     }
     //Question we are currently displaying
@@ -94,8 +114,13 @@ function presentQuestion(){
 }
 
 
+
+
 //Swap to the do you want to play initially
 swapContent(playContent);
+
+//Play button to add event listener to and add it 
+var playButton = document.querySelector("#play");
 playButton.addEventListener("click", playGame);
 
 
