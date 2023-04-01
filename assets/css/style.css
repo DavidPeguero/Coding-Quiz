@@ -36,6 +36,16 @@ body {
     margin-bottom: 0;
 }
 
+.styled-button{
+    color : white;
+    background-color: purple;
+    border: 2px black solid;
+    border-radius: 8px;
+    padding: .3rem;
+    width: 100px;
+    font-size: 16px;
+}
+
 .answers{
     position: relative;
     left: -10px;
