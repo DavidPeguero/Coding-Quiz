@@ -1,15 +1,22 @@
-//Current question index
+//Variable Required
 var qIndex = 0; 
-
 var mainContent = document.querySelector(".main-content");
 var currentQuestion = {}
+
+//Play button to add event listener to
+var playButton = document.querySelector("#play");
+
+//Formats for changing layout 
 const playContent = 
 '<div>Would you like to play a game</div> <button type="submit" id="play">Play</button>'
 
 const questionFormat = 
 '<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol>'
 
-// Question Objects
+const initialFormat = '<label for="initials"></label><input name="initials" placeholder="Initials Here"></input><button>Submit</button>'
+
+
+// Question Objects --------------------------------------------------------------
 const question1 = {
     question : "What is a number?",
     answers : ["0","word", "true", "undefined"],
@@ -34,29 +41,29 @@ const question4 = {
     correctAnswer : "undefined"
 }
 
-const qArray = [question1, question2, ];
+const qArray = [question1, question2, question3, question4];
 
+// --------------------------------------------------------------------------
+
+//Function that swaps the maincontent section with another html preset
 function swapContent(newinnerHTML){
     mainContent.innerHTML = newinnerHTML;
 }
 
-swapContent(playContent);
 
-var playButton = document.querySelector("#play");
-playButton.addEventListener("click", playGame);
 
 
 //Function that starts the game
 function playGame(){
-    swapContent(questionFormat)
-    presentQuestion() 
-       
+    swapContent(questionFormat);
+    presentQuestion();
 }
 
 
 function presentQuestion(){
     
     if(qIndex === qArray.length){
+        swapContent(initialFormat);
         return;
     }
     //Question we are currently displaying
@@ -76,7 +83,7 @@ function presentQuestion(){
         if(element.matches(".answer")){
             console.log(element.innerHTML);
             console.log(currentQuestion.correctAnswer)
-            console.log("same? " + element.innerHTML === currentQuestion.correctAnswer)
+            console.log(element.innerHTML === currentQuestion.correctAnswer)
             if(element.innerHTML === currentQuestion.correctAnswer){
                 answerList.removeEventListener("click", giveAnswer);
                 qIndex++;
@@ -87,5 +94,8 @@ function presentQuestion(){
 }
 
 
+//Swap to the do you want to play initially
+swapContent(playContent);
+playButton.addEventListener("click", playGame);
 
 
