@@ -19,9 +19,7 @@ const questionFormat =
 
 const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initials"></label><input class="initials" name="initials" placeholder="Initials Here"></input><button class="submit-score">Submit</button>'
 
-
-
-
+const viewScoreFormat = '<p class="score-list">Highscores</p><ol class="highscores"></ol>'
 // Question Objects --------------------------------------------------------------
 const question1 = {
     question : "What is a number?",
@@ -145,17 +143,34 @@ function presentQuestion(){
     })
 }
 
+//Sorting functions for user scores
+function compareScores(u1, u2) {
+    if (u1.score > u2.score) return -1;
+    if (u2.score > u1.score) return 1;
+  
+    return 0;
+  }
+
+//Initializes the scores array
 function initScores(){
     if(localStorage.getItem("userScores") === null){
         highScores = [];
     }
     else{
         highScores = JSON.parse(localStorage.getItem("userScores"));
-    }
+        highScores = highScores.sort(compareScores);
+        console.log(highScores);
+    }  
 }
 
 function viewScores(){
-    swapContent(highscoreContent);
+    swapContent(viewScoreFormat);
+    var scores = document.querySelector(".highscores");
+    for(var i = 0; i < highScores.length; i++){
+        tempLi = document.createElement('li');
+        tempLi.textContent = highScores[i].initials + ": " + highScores[i].score;
+        scores.appendChild(tempLi);
+    }
 }
 
 

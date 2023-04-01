@@ -26,7 +26,7 @@ body {
     align-items: center;
 }
 
-.question, .ask-initials, .play-game{
+.question, .ask-initials, .play-game, .score-list{
     font-size: 28px;
     font-weight: 800;
 }
