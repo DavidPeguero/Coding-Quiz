@@ -27,11 +27,13 @@ body {
 }
 
 .question, .ask-initials, .play-game, .score-list{
-    font-size: 28px;
+    font-size: 36px;
     font-weight: 800;
 }
 
 .answers{
+    position: relative;
+    left: -10px;
     display: flex;
     min-width: 300px;
     flex-direction: column;
