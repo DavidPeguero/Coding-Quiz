@@ -26,9 +26,14 @@ body {
     align-items: center;
 }
 
+.view-scores{
+    color : purple
+}
+
 .question, .ask-initials, .play-game, .score-list{
     font-size: 36px;
     font-weight: 800;
+    margin-bottom: 0;
 }
 
 .answers{
@@ -52,6 +57,7 @@ body {
     color: white;
 
 }
+ 
 .answer:hover{
     filter: brightness(150%);
 }

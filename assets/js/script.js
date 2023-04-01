@@ -7,12 +7,14 @@ var timer = 60;
 let timeInterval; 
 let highScores = [];
 
+var viewScore = document.querySelector(".view-scores")
+
 
 
 
 //Formats for changing layout 
 const playContent = 
-'<p class="play-game">Would you like to play a game</p> <button type="submit" id="play">Play</button>'
+'<h1 class="play-game">Coding Quiz</h1><p>Test your wits in a quiz to determine your Javascript knowledge! Be careful of choosing wrong; there will be consequences!</p> <button type="submit" id="play">Play</button>'
 
 const questionFormat = 
 '<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol>'
@@ -82,9 +84,24 @@ function startTimer(){
 //Function that swaps the maincontent section with another html preset
 function swapContent(newinnerHTML){
     mainContent.innerHTML = newinnerHTML;
+    if(newinnerHTML === viewScoreFormat){
+        viewScore.textContent = "Return to game";
+        viewScore.removeEventListener("click", viewScores);
+        viewScore.addEventListener("click", returnToGame)
+        clearInterval(timeInterval);
+    }
+    else if(newinnerHTML === playContent){
+        viewScore.textContent = "View Highscores";
+        viewScore.removeEventListener("click", returnToGame);
+        viewScore.addEventListener("click", viewScores)
+
+    }
 }
-
-
+ 
+function returnToGame(){
+    swapContent(playContent);
+    addPlayButtonEventListener();
+}
 
 
 //Function that starts the game
@@ -205,7 +222,6 @@ swapContent(playContent);
 
 //Play button to add event listener to and add it 
 
-var viewScore = document.querySelector(".view-scores")
 viewScore.addEventListener("click", viewScores)
 
 addPlayButtonEventListener();
