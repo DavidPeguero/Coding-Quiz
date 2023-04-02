@@ -19,9 +19,9 @@ const playContent =
 const questionFormat = 
 '<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol><p class="result-text"></p>'
 
-const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initials"></label><input class="initials" name="initials" placeholder="Initials Here"></input><button class="submit-score">Submit</button>'
+const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initials"></label><input class="initials" name="initials" placeholder="Initials Here"></input><button class="submit-score styled-button">Submit</button>'
 
-const viewScoreFormat = '<p class="score-list">Highscores</p><ol class="highscores"></ol>'
+const viewScoreFormat = '<p class="score-list">Highscores</p><ol class="highscores"></ol><div class="button-flex"><button class="styled-button inline go-back">Go Back</button><button class="styled-button inline clear-highscores">Clear Highscores</button></div>'
 // Question Objects --------------------------------------------------------------
 const question1 = {
     question : "What is method used to add an event listener?",
@@ -150,7 +150,6 @@ function presentQuestion(){
     let question = document.querySelector('.question');
     var answerList = document.querySelector(".answers");
     currentQuestion = qArray[qIndex];
-    console.log(currentQuestion);
     question.innerHTML = currentQuestion.question;
     for(var i = 0; i < answers.length; i++){
         answers[i].innerHTML = currentQuestion.answers[i];
@@ -159,7 +158,7 @@ function presentQuestion(){
     
     answerList.addEventListener("click", giveAnswer = function(e){
         var element = e.target;
-        var resultText = document.querySelector(".result-text")
+        var resultText = document.querySelector(".result-text");
         if(element.matches(".answer")){
             console.log(element.innerHTML);
             console.log(currentQuestion.correctAnswer)
@@ -180,20 +179,20 @@ function presentQuestion(){
                 if(timer <= 0){
                     clearInterval(timeInterval);
                     timerElement.innerHTML = "Time: " + 0;
-                    answerList.removeEventListener("click", giveAnswer);
-                    swapContent(playContent);
-                    addPlayButtonEventListener();
                     resultText.innerHTML = "Sorry you lost";
+                    answerList.removeEventListener("click", giveAnswer);
                     setTimeout(function(){
                         resultText.innerHTML = "";
-                    })
+                        swapContent(playContent);
+                        addPlayButtonEventListener();
+                    }, 1000)
                 }
                 else{
                     timerElement.innerHTML = "Time: " + timer;
                     resultText.innerHTML = "Wrong!"
                     setTimeout(function(){
                         resultText.innerHTML = "";
-                    }
+                    }, 1000)
                 }
             }
         }
@@ -220,25 +219,48 @@ function initScores(){
     }  
 }
 
-function viewScores(){
-    swapContent(viewScoreFormat);
+function populateHighscores(){
     var scores = document.querySelector(".highscores");
+    scores.innerHTML = ""
     for(var i = 0; i < highScores.length; i++){
         tempLi = document.createElement('li');
         tempLi.textContent = highScores[i].initials + ": " + highScores[i].score;
         scores.appendChild(tempLi);
     }
+
+    
 }
 
+function viewScores(){
+    swapContent(viewScoreFormat);
+    var goBack = document.querySelector(".go-back");
+    var clearHighscores = document.querySelector(".clear-highscores");
+    populateHighscores()
+
+    goBack.addEventListener("click", back = function(){
+        mainMenuInit();
+        goBack.removeEventListener("click", back)
+    })
+    clearHighscores.addEventListener("click", clear = function(){
+        localStorage.removeItem("userScores");
+        highScores = localStorage.getItem("userScores");
+        populateHighscores();
+    })
+}
+
+function mainMenuInit(){
+    swapContent(playContent);
+    addPlayButtonEventListener();
+}
 
 //Swap to the do you want to play initially
-swapContent(playContent);
+mainMenuInit()
 
 //Play button to add event listener to and add it 
 
 viewScore.addEventListener("click", viewScores)
 
-addPlayButtonEventListener();
+
 initScores();
 
 
