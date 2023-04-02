@@ -17,7 +17,7 @@ const playContent =
 '<h1 class="play-game">Coding Quiz</h1><p>Test your wits in a quiz to determine your Javascript knowledge! Be careful of choosing wrong; there will be consequences!</p> <button class="styled-button" type="submit" id="play">Play</button>'
 
 const questionFormat = 
-'<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol>'
+'<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol><p class="result-text"></p>'
 
 const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initials"></label><input class="initials" name="initials" placeholder="Initials Here"></input><button class="submit-score">Submit</button>'
 
@@ -128,8 +128,7 @@ function addInitialEventListener(){
             })  
             localStorage.setItem("userScores" ,JSON.stringify(highScores));
             submitScoreBtn.removeEventListener("click", saveScore);
-            swapContent(playContent);
-            addPlayButtonEventListener();
+            viewScores();   
         }
     })
 }
@@ -160,6 +159,7 @@ function presentQuestion(){
     
     answerList.addEventListener("click", giveAnswer = function(e){
         var element = e.target;
+        var resultText = document.querySelector(".result-text")
         if(element.matches(".answer")){
             console.log(element.innerHTML);
             console.log(currentQuestion.correctAnswer)
@@ -167,7 +167,13 @@ function presentQuestion(){
             if(element.innerHTML === currentQuestion.correctAnswer){
                 answerList.removeEventListener("click", giveAnswer);
                 qIndex++;
-                presentQuestion();
+                resultText.innerHTML = "Correct!"
+                setTimeout(function(){
+                    presentQuestion();
+                    resultText.innerHTML = "";
+                }, 1000);
+                
+                
             }
             else{
                 timer -= 10;
@@ -177,9 +183,17 @@ function presentQuestion(){
                     answerList.removeEventListener("click", giveAnswer);
                     swapContent(playContent);
                     addPlayButtonEventListener();
+                    resultText.innerHTML = "Sorry you lost";
+                    setTimeout(function(){
+                        resultText.innerHTML = "";
+                    })
                 }
                 else{
                     timerElement.innerHTML = "Time: " + timer;
+                    resultText.innerHTML = "Wrong!"
+                    setTimeout(function(){
+                        resultText.innerHTML = "";
+                    }
                 }
             }
         }
