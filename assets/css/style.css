@@ -51,6 +51,19 @@ body {
     font-size: 16px;
 }
 
+.submit-score{
+    margin-left: 12px;
+    font-size: 14px;
+}
+
+.result-text{
+    display: none;
+    width: 100%;
+    color: gray;
+    padding-top: 1rem;
+    border-top: 2px solid grey;
+
+}
 .answers{
     position: relative;
     left: -10px;

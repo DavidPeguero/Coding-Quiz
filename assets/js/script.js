@@ -17,7 +17,7 @@ const playContent =
 '<h1 class="play-game">Coding Quiz</h1><p>Test your wits in a quiz to determine your Javascript knowledge! Be careful of choosing wrong; there will be consequences!</p> <button class="styled-button" type="submit" id="play">Play</button>'
 
 const questionFormat = 
-'<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li></ol><p class="result-text"></p>'
+'<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li><p class="result-text"></p></ol>'
 
 const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initials"></label><input class="initials" name="initials" placeholder="Initials Here"></input><button class="submit-score styled-button">Submit</button>'
 
@@ -166,10 +166,11 @@ function presentQuestion(){
             if(element.innerHTML === currentQuestion.correctAnswer){
                 answerList.removeEventListener("click", giveAnswer);
                 qIndex++;
+                resultText.style.display = "block";
                 resultText.innerHTML = "Correct!"
                 setTimeout(function(){
                     presentQuestion();
-                    resultText.innerHTML = "";
+                    resultText.style.display = "none";
                 }, 1000);
                 
                 
@@ -179,18 +180,21 @@ function presentQuestion(){
                 if(timer <= 0){
                     clearInterval(timeInterval);
                     timerElement.innerHTML = "Time: " + 0;
+                    resultText.style.display = "block";
                     resultText.innerHTML = "Sorry you lost";
                     answerList.removeEventListener("click", giveAnswer);
                     setTimeout(function(){
-                        resultText.innerHTML = "";
+                        resultText.style.display = "none";
                         mainMenuInit();
                     }, 1000)
                 }
                 else{
                     timerElement.innerHTML = "Time: " + timer;
+                    resultText.style.display = "block";
                     resultText.innerHTML = "Wrong!"
                     setTimeout(function(){
                         resultText.innerHTML = "";
+                        resultText.style.display = "none";
                     }, 1000)
                 }
             }
