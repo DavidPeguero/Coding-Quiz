@@ -230,6 +230,9 @@ function initScores(){
 function populateHighscores(){
     var scores = document.querySelector(".highscores");
     scores.innerHTML = ""
+    if(localStorage.getItem("userScores") === null){
+        return;
+    }
     for(var i = 0; i < highScores.length; i++){
         tempLi = document.createElement('li');
         tempLi.textContent = highScores[i].initials + ": " + highScores[i].score;
