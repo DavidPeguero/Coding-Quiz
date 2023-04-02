@@ -183,8 +183,7 @@ function presentQuestion(){
                     answerList.removeEventListener("click", giveAnswer);
                     setTimeout(function(){
                         resultText.innerHTML = "";
-                        swapContent(playContent);
-                        addPlayButtonEventListener();
+                        mainMenuInit();
                     }, 1000)
                 }
                 else{
