@@ -14,14 +14,14 @@ var viewScore = document.querySelector(".view-scores")
 
 //Formats for changing layout 
 const playContent = 
-'<h1 class="play-game">Coding Quiz</h1><p class="rules">Test your wits in a quiz to determine your Javascript knowledge! Be careful of choosing wrong; there will be consequences!</p> <button class="styled-button" type="submit" id="play">Play</button>'
+'<h1 class="play-game">Coding Quiz</h1><p class="subheader">Test your wits in a quiz to determine your Javascript knowledge! Be careful of choosing wrong; there will be consequences!</p> <button class="styled-button" type="submit" id="play">Play</button>'
 
 const questionFormat = 
-'<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li><p class="result-text"></p></ol>'
+'<h1 class="question"></h1><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li><p class="result-text"></p></ol>'
 
-const initialFormat = '<p class="ask-initials">Save Score!<p><label for="initials"></label><input class="initials" name="initials" placeholder="Initials Here"></input><button class="submit-score styled-button">Submit</button>'
+const initialFormat = '<h1 class="ask-initials">Save Score!<h1><p class="subheader align-center"></p><label for="initials"></label><input class="initials" name="initials" placeholder="Initials Here"></input><button class="submit-score styled-button">Submit</button>'
 
-const viewScoreFormat = '<p class="score-list">Highscores</p><ol class="highscores"></ol><div class="button-flex"><button class="styled-button inline go-back">Go Back</button><button class="styled-button inline clear-highscores">Clear Highscores</button></div>'
+const viewScoreFormat = '<h1 class="score-list">Highscores</h1><ol class="highscores"></ol><div class="button-flex"><button class="styled-button inline go-back">Go Back</button><button class="styled-button inline clear-highscores">Clear Highscores</button></div>'
 // Question Objects --------------------------------------------------------------
 const question1 = {
     question : "What is method used to add an event listener?",
@@ -133,16 +133,21 @@ function addInitialEventListener(){
     })
 }
 
+function submitInitialInit(){
+    qIndex = 0;
+    swapContent(initialFormat);
+    var results = document.querySelector(".subheader");
+    results.innerHTML = `You score is ${timer}`;
+    clearInterval(timeInterval);
+    addInitialEventListener()
+}
 
 
 //Presents the next question until no more questions are left
 function presentQuestion(){
     
-    if(qIndex === qArray.length){
-        qIndex = 0;
-        swapContent(initialFormat);
-        clearInterval(timeInterval);
-        addInitialEventListener()
+    if(qIndex === qArray.length){ 
+        submitInitialInit();       
         return;
     }
     //Question we are currently displaying
