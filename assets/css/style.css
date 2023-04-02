@@ -12,6 +12,10 @@ body{
     line-height: 1.5;
 }
 
+.subheader{
+    text-align: center;
+}
+
 .align-center{
     text-align: center;
 }
@@ -29,19 +33,18 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
 }
 
 .view-scores{
-    color : purple
+    color : purple;
 }
 
 .question, .ask-initials, .play-game, .score-list{
     font-size: 36px;
     font-weight: 800;
     margin-bottom: 0;
-    text-align: center;
 }
+
 
 .button-flex{
     display: flex;
@@ -73,13 +76,12 @@ body{
 }
 .answers{
     position: relative;
-    left: -10px;
     display: flex;
     min-width: 300px;
     flex-direction: column;
     align-items: center;
     list-style: none;
-    text-align: left;
+    justify-content: left;
 }
 
 .answer{
@@ -87,7 +89,7 @@ body{
     border: black 2px solid;
     border-radius: 8px;
     background-color: purple;
-    margin: 5px;
+    margin-bottom: 5px;
     text-align: left;
     color: white;
 
