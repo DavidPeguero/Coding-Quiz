@@ -48,13 +48,13 @@ const question3 = {
 }
 
 const question4 = {
-    question : "What does DOM stand for",
+    question : "What does DOM stand for?",
     answers : ["Document Object Model","Domain Of Man", "Document Object Methods", "None of the Above"],
     correctAnswer : "Document Object Model"
 }
 
 const question5 = {
-    question : "Which of the following is true concerning localStorage",
+    question : "Which of the following is true concerning localStorage?",
     answers : ["Can store objects","Can only store strings", "When using setItem on an item that doesn't exist it returns 0", "None of the Above"],
     correctAnswer : "Can only store strings"
 }
@@ -137,7 +137,7 @@ function submitInitialInit(){
     qIndex = 0;
     swapContent(initialFormat);
     var results = document.querySelector(".subheader");
-    results.innerHTML = `You score is ${timer}`;
+    results.innerHTML = "Your score is " + timer;
     clearInterval(timeInterval);
     addInitialEventListener()
 }
