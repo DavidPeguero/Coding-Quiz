@@ -87,21 +87,17 @@ function swapContent(newinnerHTML){
     if(newinnerHTML === viewScoreFormat){
         viewScore.textContent = "Return to game";
         viewScore.removeEventListener("click", viewScores);
-        viewScore.addEventListener("click", returnToGame)
+        viewScore.addEventListener("click", mainMenuInit)
         clearInterval(timeInterval);
     }
     else if(newinnerHTML === playContent){
         viewScore.textContent = "View Highscores";
-        viewScore.removeEventListener("click", returnToGame);
+        viewScore.removeEventListener("click", mainMenuInit);
         viewScore.addEventListener("click", viewScores)
 
     }
 }
- 
-function returnToGame(){
-    swapContent(playContent);
-    addPlayButtonEventListener();
-}
+
 
 
 //Function that starts the game
@@ -111,6 +107,7 @@ function playGame(){
     presentQuestion();
 }
 
+//Adds event listeners to play button in main screen
 function addPlayButtonEventListener(){
     var playButton = document.querySelector("#play");
     playButton.addEventListener("click", playGame);
@@ -133,6 +130,7 @@ function addInitialEventListener(){
     })
 }
 
+//Swap to submit initials screen and add event listeners
 function submitInitialInit(){
     qIndex = 0;
     swapContent(initialFormat);
@@ -141,6 +139,7 @@ function submitInitialInit(){
     clearInterval(timeInterval);
     addInitialEventListener()
 }
+
 
 
 //Presents the next question until no more questions are left
@@ -156,18 +155,18 @@ function presentQuestion(){
     var answerList = document.querySelector(".answers");
     currentQuestion = qArray[qIndex];
     question.innerHTML = currentQuestion.question;
+    //Display all answers
     for(var i = 0; i < answers.length; i++){
         answers[i].innerHTML = currentQuestion.answers[i];
     }
 
-    
+    //Add event listener the answer list
     answerList.addEventListener("click", giveAnswer = function(e){
         var element = e.target;
         var resultText = document.querySelector(".result-text");
+        //If the user clicks on an answer respond accordingly
         if(element.matches(".answer")){
-            console.log(element.innerHTML);
-            console.log(currentQuestion.correctAnswer)
-            console.log(element.innerHTML === currentQuestion.correctAnswer)
+            //If correct answer was clicked display correct and on a delay present the next question
             if(element.innerHTML === currentQuestion.correctAnswer){
                 answerList.removeEventListener("click", giveAnswer);
                 qIndex++;
@@ -180,8 +179,11 @@ function presentQuestion(){
                 
                 
             }
+
+            //Otherwise -10 from the timer and check for loss
             else{
                 timer -= 10;
+                //If lost display loss and go back to initial screen
                 if(timer <= 0){
                     clearInterval(timeInterval);
                     timerElement.innerHTML = "Time: " + 0;
@@ -193,6 +195,7 @@ function presentQuestion(){
                         mainMenuInit();
                     }, 1000)
                 }
+                //Otherwise display wrong and update timer 
                 else{
                     timerElement.innerHTML = "Time: " + timer;
                     resultText.style.display = "block";
@@ -226,7 +229,7 @@ function initScores(){
         console.log(highScores);
     }  
 }
-
+//Function that rerender highscore screen;
 function populateHighscores(){
     var scores = document.querySelector(".highscores");
     scores.innerHTML = ""
@@ -242,37 +245,42 @@ function populateHighscores(){
     
 }
 
+
+//Swaps to view score screen and adds the appropriate event listeners
 function viewScores(){
     qIndex = 0;
     swapContent(viewScoreFormat);
     var goBack = document.querySelector(".go-back");
     var clearHighscores = document.querySelector(".clear-highscores");
-    populateHighscores()
+    populateHighscores();
 
+    //Event that goes back to main menu
     goBack.addEventListener("click", back = function(){
         mainMenuInit();
         goBack.removeEventListener("click", back)
-    })
+    });
+
+    //Event that clears all scores in localStorage and rerender the screen
     clearHighscores.addEventListener("click", clear = function(){
         localStorage.removeItem("userScores");
         highScores = localStorage.getItem("userScores");
         populateHighscores();
-    })
+    });
 }
 
+//Swaps to mainmenu and add event listeners
 function mainMenuInit(){
     swapContent(playContent);
     addPlayButtonEventListener();
 }
 
 //Swap to the do you want to play initially
-mainMenuInit()
+mainMenuInit();
 
 //Play button to add event listener to and add it 
+viewScore.addEventListener("click", viewScores);
 
-viewScore.addEventListener("click", viewScores)
-
-
+//Initializes highscore array.
 initScores();
 
 
