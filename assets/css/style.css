@@ -105,7 +105,7 @@ body{
     display: inline;
 }
  
-.answer:hover{
+.answer:hover, .styled-button:hover{
     filter: brightness(150%);
     cursor: pointer;
 }
