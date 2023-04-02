@@ -14,7 +14,7 @@ var viewScore = document.querySelector(".view-scores")
 
 //Formats for changing layout 
 const playContent = 
-'<h1 class="play-game">Coding Quiz</h1><p>Test your wits in a quiz to determine your Javascript knowledge! Be careful of choosing wrong; there will be consequences!</p> <button class="styled-button" type="submit" id="play">Play</button>'
+'<h1 class="play-game">Coding Quiz</h1><p class="rules">Test your wits in a quiz to determine your Javascript knowledge! Be careful of choosing wrong; there will be consequences!</p> <button class="styled-button" type="submit" id="play">Play</button>'
 
 const questionFormat = 
 '<p class="question"></p><ol class="answers"><li class="answer"></li><li class="answer"></li><li class="answer"></li><li class="answer"></li><p class="result-text"></p></ol>'
