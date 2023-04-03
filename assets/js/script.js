@@ -24,7 +24,7 @@ const initialFormat = '<h1 class="ask-initials">Save Score!<h1><p class="subhead
 const viewScoreFormat = '<h1 class="score-list">Highscores</h1><ol class="highscores"></ol><div class="button-flex"><button class="styled-button inline go-back">Go Back</button><button class="styled-button inline clear-highscores">Clear Highscores</button></div>'
 // Question Objects --------------------------------------------------------------
 const question1 = {
-    question : "What is method used to add an event listener?",
+    question : "What method used to add an event listener?",
     answers : ["addEventLister","removeEventListener", "appendChild", "addEventListener"],
     correctAnswer : "addEventListener"
 }
@@ -49,7 +49,7 @@ const question3 = {
 
 const question4 = {
     question : "What does DOM stand for?",
-    answers : ["Document Object Model","Domain Of Man", "Document Object Methods", "None of the Above"],
+    answers : ["Document Object Model","Domain Of Monkey's", "Document Object Methods", "None of the Above"],
     correctAnswer : "Document Object Model"
 }
 
@@ -116,7 +116,7 @@ function addPlayButtonEventListener(){
 //Adds event listener to and the save score function to the submit button in the highscore context
 function addInitialEventListener(){
     var submitScoreBtn = document.querySelector(".submit-score");
-    var initialsElement = document.querySelector(".initials")
+    var initialsElement = document.querySelector(".initials");
     submitScoreBtn.addEventListener("click", saveScore = function(){
         if(initialsElement.value !== ""){
             highScores.push({
@@ -137,6 +137,7 @@ function submitInitialInit(){
     var results = document.querySelector(".subheader");
     results.innerHTML = "Your score is " + timer;
     clearInterval(timeInterval);
+    initScores();
     addInitialEventListener()
 }
 
@@ -191,6 +192,7 @@ function presentQuestion(){
                     resultText.innerHTML = "Sorry you lost";
                     answerList.removeEventListener("click", giveAnswer);
                     setTimeout(function(){
+                        qIndex = 0;
                         resultText.style.display = "none";
                         mainMenuInit();
                     }, 1000)

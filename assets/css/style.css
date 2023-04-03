@@ -128,6 +128,15 @@ body{
     content: "4. ";
 }
 
+.highscores{
+    width: 500px;
+}
+
+.highscores li{
+    background-color: lightcoral;
+    margin-top: 5px;
+}
+
 
 @media screen and (max-width:750px) {
     *{
