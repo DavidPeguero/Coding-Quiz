@@ -202,7 +202,9 @@ function presentQuestion(){
                     timerElement.innerHTML = "Time: " + timer;
                     resultText.style.display = "block";
                     resultText.innerHTML = "Wrong!"
+                    answerList.removeEventListener("click", giveAnswer);
                     setTimeout(function(){
+                        answerList.addEventListener("click", giveAnswer);
                         resultText.innerHTML = "";
                         resultText.style.display = "none";
                     }, 1000)
