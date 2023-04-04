@@ -75,8 +75,18 @@ function startTimer(){
         //When timer is done do this
         if(timer === 0){
             clearInterval(timeInterval);
+            var resultText = document.querySelector(".result-text");
+            var answerList = document.querySelector(".answers");
+            timerElement.innerHTML = "Time: " + 0;
+                    resultText.style.display = "block";
+                    resultText.innerHTML = "Sorry you lost";
+                    answerList.removeEventListener("click", giveAnswer);
+                    setTimeout(function(){
+                        resultText.style.display = "none";
+                        mainMenuInit();
+            }, 1000)
         }
-    },1000)
+    },100)
 
     return timeInterval;
 }
@@ -192,7 +202,7 @@ function presentQuestion(){
                     resultText.innerHTML = "Sorry you lost";
                     answerList.removeEventListener("click", giveAnswer);
                     setTimeout(function(){
-                        qIndex = 0;
+                        console.log("It's over")
                         resultText.style.display = "none";
                         mainMenuInit();
                     }, 1000)
@@ -207,7 +217,7 @@ function presentQuestion(){
                         answerList.addEventListener("click", giveAnswer);
                         resultText.innerHTML = "";
                         resultText.style.display = "none";
-                    }, 1000)
+                    }, 1000);
                 }
             }
         }
