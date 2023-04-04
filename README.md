@@ -6,11 +6,22 @@ Quiz page that tests your knowledge about Javascript. It has highscore saving/cl
 You can access the page [here](https://davidpeguero.github.io/Coding-Quiz/)
 
 ### Screnshots
-![](./assets/images/)
+
+#### Main Menu
+![](./assets/images/quiz-main.png)
+
+#### Question Screen
+![](./assets/images/quiz-question.png)
+
+#### Add Scores Screen
+![](./assets/images/quiz-initials.png)
+
+#### Scores Screen
+![](./assets/images/quiz-scores.png)
 
 ## Usage
 
-Press Play and Follow Instruction 
+Press Play and Follow Instructions 
 
 ## Installation 
 N/A
