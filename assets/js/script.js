@@ -86,7 +86,7 @@ function startTimer(){
                         mainMenuInit();
             }, 1000)
         }
-    },100)
+    },1000)
 
     return timeInterval;
 }
